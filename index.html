@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recycling Behaviors Study - Complete Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .supported {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .not-supported {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .failure-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .badge-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .image-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-caption {
+            margin-top: 10px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🌱 Recycling Behaviors Study</h1>
+            <p>Hands-On Workshop vs. Awareness Video: A Randomized Controlled Trial</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">N = 100 Students | Ages 12-18 | March 2026</p>
+        </header>
+
+        <div class="content">
+            <!-- Executive Summary -->
+            <div class="section">
+                <h2>📊 Executive Summary</h2>
+
+                <div class="highlight">
+                    <h3 style="margin-top: 0;">Key Finding</h3>
+                    <p style="font-size: 1.1em;">The hands-on recycling workshop <strong>increased observable recycling
+                            behavior by 24 percentage points</strong> (62.2% vs 38.2%, p = 0.0167) and worked
+                        <strong>exceptionally well for intrinsically motivated students</strong> (91.67% vs 51.85%, p =
+                        0.0147), but did NOT improve knowledge, attitudes, or sorting accuracy.
+                    </p>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="stat-card">
+                        <h4>Hypotheses Tested</h4>
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Total hypotheses</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Success Rate</h4>
+                        <div class="stat-value">33.3%</div>
+                        <div class="stat-label">2 out of 6 supported</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Sample Size</h4>
+                        <div class="stat-value">100</div>
+                        <div class="stat-label">Workshop: 45 | Video: 55</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Age Range</h4>
+                        <div class="stat-value">12-18</div>
+                        <div class="stat-label">Mean: 15.18 years</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Hypothesis Results Table -->
+            <div class="section">
+                <h2>🔬 Hypothesis Testing Results</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>H#</th>
+                            <th>Hypothesis</th>
+                            <th>Result</th>
+                            <th>p-value</th>
+                            <th>Effect Size</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>H1</strong></td>
+                            <td>Sorting Accuracy</td>
+                            <td>Workshop: 78.56% vs Video: 80.06%</td>
+                            <td>0.7492</td>
+                            <td>d = -0.136</td>
+                            <td><span class="badge badge-danger">❌ Not Supported</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>H2a</strong></td>
+                            <td>Recycling Frequency</td>
+                            <td>Workshop: 2.80 vs Video: 2.98</td>
+                            <td>0.7528</td>
+                            <td>r = 0.078</td>
+                            <td><span class="badge badge-danger">❌ Not Supported</span></td>
+                        </tr>
+                        <tr style="background-color: #d4edda;">
+                            <td><strong>H2b</strong></td>
+                            <td>Observed Participation</td>
+                            <td><strong>Workshop: 62.2% vs Video: 38.2%</strong></td>
+                            <td><strong>0.0167</strong></td>
+                            <td><strong>V = 0.239</strong></td>
+                            <td><span class="badge badge-success">✅ SUPPORTED</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>H3</strong></td>
+                            <td>Emotional Mediation</td>
+                            <td>No mediation detected</td>
+                            <td>0.964</td>
+                            <td>ACME ≈ 0</td>
+                            <td><span class="badge badge-danger">❌ Not Supported</span></td>
+                        </tr>
+                        <tr style="background-color: #d4edda;">
+                            <td><strong>H4</strong></td>
+                            <td>Motivation Moderation</td>
+                            <td><strong>Intrinsic: 91.67% vs 51.85%</strong></td>
+                            <td><strong>0.0147</strong></td>
+                            <td><strong>β = 2.324</strong></td>
+                            <td><span class="badge badge-success">✅ SUPPORTED</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>H5</strong></td>
+                            <td>Knowledge Mediation</td>
+                            <td>No mediation detected</td>
+                            <td>0.920</td>
+                            <td>ACME ≈ 0</td>
+                            <td><span class="badge badge-danger">❌ Not Supported</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>H6</strong></td>
+                            <td>Attitude Change</td>
+                            <td>Workshop: 7.4 vs Video: 7.4</td>
+                            <td>0.5000</td>
+                            <td>d = 0.00</td>
+                            <td><span class="badge badge-danger">❌ Not Supported</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- Sample Characteristics -->
+            <div class="section">
+                <h2>👥 Sample Characteristics</h2>
+
+                <h3>Demographics by Group</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Workshop (n=45)</th>
+                            <th>Video (n=55)</th>
+                            <th>Total (N=100)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Age (M ± SD)</td>
+                            <td>15.04 ± 1.97</td>
+                            <td>15.29 ± 2.18</td>
+                            <td>15.18 ± 2.08</td>
+                        </tr>
+                        <tr>
+                            <td>Female (%)</td>
+                            <td>53.3%</td>
+                            <td>60.0%</td>
+                            <td>57.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Public School (%)</td>
+                            <td>51.1%</td>
+                            <td>61.8%</td>
+                            <td>57.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Intrinsic Motivation (%)</td>
+                            <td>53.3%</td>
+                            <td>49.1%</td>
+                            <td>51.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Prior Knowledge (M ± SD)</td>
+                            <td>2.76 ± 1.38</td>
+                            <td>3.29 ± 1.29</td>
+                            <td>3.05 ± 1.35</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="success-box">
+                    <strong>✅ Randomization Check:</strong> Groups are well-balanced across all demographic variables.
+                </div>
+            </div>
+
+
+            <!-- Visualizations Section -->
+            <div class="section">
+                <h2>📈 Data Visualizations</h2>
+
+                <div class="image-container">
+                    <img src="Group assignment/plot1_sorting_accuracy.png" alt="Sorting Accuracy by Group">
+                    <p class="image-caption">Figure 1: Sorting Accuracy by Intervention Type (No significant difference)
+                    </p>
+                </div>
+
+                <div class="image-container">
+                    <img src="Group assignment/plot2_recycling_frequency.png" alt="Recycling Frequency">
+                    <p class="image-caption">Figure 2: Recycling Frequency Distribution by Group</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="Group assignment/plot3_mediators.png" alt="Mediator Variables">
+                    <p class="image-caption">Figure 3: Mediator Variables (Knowledge, Emotion, Attitude)</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="Group assignment/plot4_binary_outcomes.png" alt="Binary Outcomes">
+                    <p class="image-caption">Figure 4: Binary Outcomes - Observed Participation and Behavior Change</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="Group assignment/plot5_age_distribution.png" alt="Age Distribution">
+                    <p class="image-caption">Figure 5: Age Distribution by Intervention Type</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="Group assignment/Conceptual_Model_Diagram.png" alt="Conceptual Model">
+                    <p class="image-caption">Figure 6: Conceptual Model Diagram</p>
+                </div>
+            </div>
+
+
+            <!-- Detailed R Results -->
+            <div class="section">
+                <h2>💻 Detailed R Statistical Output</h2>
+
+                <h3>H1: Sorting Accuracy (t-test)</h3>
+                <div class="code-block">
+                    Welch Two Sample t-test
+
+                    data: RecyclingSortingAccuracy by InterventionType
+                    t = -0.67454, df = 98, p-value = 0.7492
+                    alternative hypothesis: true difference in means between group Video and group Workshop is less than
+                    0
+                    95 percent confidence interval:
+                    -Inf 5.207256
+                    sample estimates:
+                    mean in group Video mean in group Workshop
+                    80.06200 78.55778
+
+                    Levene's Test for Homogeneity of Variance (center = median)
+                    Df F value Pr(>F)
+                    group 1 0.9344 0.8206
+                    98
+
+                    Cohen's d = -0.136 (negligible effect)
+                </div>
+                <div class="failure-box">
+                    <strong>Decision:</strong> ❌ RETAIN H0 — No significant difference (p = 0.7492). The workshop did
+                    NOT improve sorting accuracy.
+                </div>
+
+                <h3>H2a: Recycling Frequency (Mann-Whitney U)</h3>
+                <div class="code-block">
+                    Wilcoxon rank sum test with continuity correction
+
+                    data: RecyclingFrequency by InterventionType
+                    W = 1141.5, p-value = 0.7528
+                    alternative hypothesis: true location shift is greater than 0
+
+                    Rank-biserial correlation: r = 0.078 (negligible effect)
+                </div>
+                <div class="failure-box">
+                    <strong>Decision:</strong> ❌ RETAIN H0 — No significant difference (p = 0.7528). The workshop did
+                    NOT increase self-reported recycling frequency.
+                </div>
+
+
+                <h3>H2b: Observed Recycling Participation (Chi-Square) ✅</h3>
+                <div class="code-block">
+                    Contingency Table:
+                    Not Observed (0) Observed (1) % Observed
+                    Workshop 17 (37.8%) 28 (62.2%) 62.2%
+                    Video 34 (61.8%) 21 (38.2%) 38.2%
+
+                    Pearson's Chi-squared test
+
+                    data: ObservedRecyclingParticipation by InterventionType
+                    X-squared = 5.7239, df = 1, p-value = 0.01674
+
+                    Cramér's V = 0.239 (small-to-medium effect)
+                </div>
+                <div class="success-box">
+                    <strong>Decision:</strong> ✅ REJECT H0 — Workshop significantly increased observed recycling
+                    behavior (p = 0.0167). Workshop students were 1.63× more likely to be observed recycling (62.2% vs
+                    38.2%, a 24 percentage point difference).
+                </div>
+
+                <h3>H3: Emotional Connection Mediation</h3>
+                <div class="code-block">
+                    Causal Mediation Analysis
+                    Nonparametric Bootstrap Confidence Intervals (1000 simulations)
+
+                    Estimate 95% CI Lower 95% CI Upper p-value
+                    ACME (average) -0.00085553 -0.02839213 0.02150627 0.964
+                    ADE (average) 0.22136791 0.04563674 0.38399594 0.018 *
+                    Total Effect 0.22051238 0.04065363 0.37678297 0.018 *
+                    Prop. Mediated (average) -0.00387973 -0.17723123 0.15092703 0.962
+
+                    Sample Size Used: 100
+                    Simulations: 1000
+                </div>
+                <div class="failure-box">
+                    <strong>Decision:</strong> ❌ RETAIN H0 — No mediation detected (p = 0.964). The workshop increases
+                    BehaviorChange (total effect p = 0.018), but NOT through EmotionalConnection.
+                </div>
+
+
+                <h3>H4: Motivation Moderation ✅</h3>
+                <div class="code-block">
+                    Logistic Regression with Interaction:
+
+                    glm(formula = SustainedParticipation ~ IV * Motivation, family = binomial)
+
+                    Coefficients:
+                    Estimate Std. Error z value Pr(>|z|)
+                    (Intercept) 2.877e-01 3.819e-01 0.753 0.4513
+                    IV_dummy 5.054e-15 5.833e-01 0.000 1.0000
+                    Motivation_dummy -2.136e-01 5.424e-01 -0.394 0.6938
+                    IV_dummy:Motivation_dummy 2.324e+00 1.017e+00 2.285 0.0223 *
+
+                    Likelihood Ratio Test:
+                    Model 1 (main effects): Resid. Dev = 124.04
+                    Model 2 (with interaction): Resid. Dev = 118.09
+                    Deviance = 5.9547, df = 1, p-value = 0.01468 *
+
+                    Predicted Probabilities:
+                    Extrinsic Intrinsic
+                    Video 57.14% 51.85%
+                    Workshop 57.14% 91.67% ← 39.82 pp gain!
+                </div>
+                <div class="success-box">
+                    <strong>Decision:</strong> ✅ REJECT H0 — Moderation confirmed (p = 0.0147). For extrinsically
+                    motivated students, the workshop makes NO difference (57.14% in both conditions). But for
+                    intrinsically motivated students, the workshop nearly doubles sustained participation (51.85% →
+                    91.67%).
+                </div>
+
+                <h3>H5: Knowledge Retention Mediation</h3>
+                <div class="code-block">
+                    Causal Mediation Analysis
+                    Nonparametric Bootstrap Confidence Intervals (1000 simulations)
+
+                    Estimate 95% CI Lower 95% CI Upper p-value
+                    ACME -0.0131621 -0.6263998 0.4772595 0.920
+                    ADE -1.4910601 -5.5586094 2.9242721 0.528
+                    Total Effect -1.5042222 -5.7698294 2.9112035 0.510
+                    Prop. Mediated 0.0087501 -0.8961479 0.9943908 0.906
+
+                    Sample Size Used: 100
+                    Simulations: 1000
+                </div>
+                <div class="failure-box">
+                    <strong>Decision:</strong> ❌ RETAIN H0 — No mediation detected (p = 0.920). Complete failure of the
+                    mediation model.
+                </div>
+
+
+                <h3>H6: Attitude Change (t-test)</h3>
+                <div class="code-block">
+                    Two Sample t-test
+
+                    data: AttitudeTowardRecycling by InterventionType
+                    t = 0, df = 98, p-value = 0.5
+                    alternative hypothesis: true difference in means is greater than 0
+                    95 percent confidence interval:
+                    -0.6050337 Inf
+                    sample estimates:
+                    mean of x mean of y
+                    7.4 7.4
+
+                    Cohen's d = 0 (no difference whatsoever)
+                </div>
+                <div class="failure-box">
+                    <strong>Decision:</strong> ❌ RETAIN H0 — No difference in attitudes (p = 0.5000). Both groups
+                    reported identical post-intervention attitudes (Workshop M = 7.4, Video M = 7.4).
+                </div>
+            </div>
+
+
+            <!-- Key Findings -->
+            <div class="section">
+                <h2>🎯 Key Findings & Interpretation</h2>
+
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">What Worked ✅</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Observable Behavior (H2b):</strong> Workshop increased recycling by 24 percentage
+                            points (62.2% vs 38.2%, p = 0.0167, V = 0.239)</li>
+                        <li><strong>Motivation Moderation (H4):</strong> Intrinsic students showed 39.82 pp gain in
+                            sustained participation (91.67% vs 51.85%, p = 0.0147)</li>
+                    </ul>
+                </div>
+
+                <div class="failure-box">
+                    <h3 style="margin-top: 0;">What Didn't Work ❌</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Sorting Accuracy (H1):</strong> No improvement (p = 0.7492, d = -0.136)</li>
+                        <li><strong>Self-Reported Frequency (H2a):</strong> No difference (p = 0.7528, r = 0.078)</li>
+                        <li><strong>Emotional Mediation (H3):</strong> Not operating (p = 0.964, ACME ≈ 0)</li>
+                        <li><strong>Knowledge Mediation (H5):</strong> Not operating (p = 0.920, ACME ≈ 0)</li>
+                        <li><strong>Attitude Change (H6):</strong> Identical scores (p = 0.5000, d = 0.00)</li>
+                    </ul>
+                </div>
+
+                <div class="highlight">
+                    <h3 style="margin-top: 0;">🔑 Key Takeaway</h3>
+                    <p style="font-size: 1.1em;">Hands-on workshops increase <strong>observable recycling
+                            behavior</strong>, especially for <strong>intrinsically motivated students</strong>, but
+                        don't improve knowledge, attitudes, or operate through hypothesized mediators. The mechanisms
+                        remain unclear and warrant further investigation.</p>
+                </div>
+            </div>
+
+
+            <!-- Policy Implications -->
+            <div class="section">
+                <h2>🏛️ Public Policy Implications</h2>
+
+                <h3>1. Shift from Awareness to Action</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Passive campaigns (videos) are not effective</li>
+                    <li>Policies should prioritize hands-on, experiential programs</li>
+                    <li>Focus on actual recycling practice rather than just information delivery</li>
+                </ul>
+
+                <h3>2. Target the Right Population</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Strong effects only for intrinsically motivated individuals</li>
+                    <li>Use segmentation strategies (schools, profiles, incentives)</li>
+                    <li>Consider different approaches for extrinsically motivated populations</li>
+                </ul>
+
+                <h3>3. Rethink Behavior Change Strategies</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Knowledge and attitudes did not drive behavior</li>
+                    <li>Focus on behavioral engagement, social norms, and situational factors</li>
+                    <li>Move beyond information campaigns and attitude change efforts</li>
+                </ul>
+
+                <h3>4. Design More Effective Interventions</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Combine workshops with nudges or incentives</li>
+                    <li>Encourage repetition and habit formation</li>
+                    <li>Address inequality: workshops may widen gaps between motivated and unmotivated students</li>
+                    <li>Develop complementary strategies for universal impact</li>
+                </ul>
+            </div>
+
+
+            <!-- Limitations -->
+            <div class="section">
+                <h2>⚠️ Limitations & Future Improvements</h2>
+
+                <h3>Limitations</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Self-reported data:</strong> Potential bias in frequency and attitude measures</li>
+                    <li><strong>Short-term measurement:</strong> Only immediate post-intervention effects captured</li>
+                    <li><strong>Weak mediators:</strong> Possible measurement issues with emotional connection and
+                        knowledge retention</li>
+                    <li><strong>Sample limited:</strong> Students ages 12-18 only; generalizability concerns</li>
+                </ul>
+
+                <h3>Future Improvements</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Better emotional measures with validated scales</li>
+                    <li>Long-term tracking (3, 6, 12 months) to assess sustained behavior change</li>
+                    <li>Larger sample size for more robust moderation/mediation analyses</li>
+                    <li>Field experiments in real-world settings beyond schools</li>
+                    <li>Test alternative mediators (social norms, peer influence, habits)</li>
+                </ul>
+            </div>
+
+            <!-- Methods -->
+            <div class="section">
+                <h2>🔬 Statistical Methods</h2>
+
+                <ul style="margin-left: 20px;">
+                    <li><strong>Group comparisons:</strong> Independent samples t-tests for continuous outcomes (H1,
+                        H6), Mann-Whitney U test for ordinal data (H2a), Chi-square test for categorical outcomes (H2b)
+                    </li>
+                    <li><strong>Mediation analyses (H3, H5):</strong> Baron-Kenny steps with bootstrapped confidence
+                        intervals (1000 simulations), tested Average Causal Mediation Effects (ACME)</li>
+                    <li><strong>Moderation analysis (H4):</strong> Logistic regression with interaction term
+                        (Intervention × Motivation), Likelihood ratio tests for model comparison</li>
+                    <li><strong>Effect sizes reported:</strong> Cohen's d, rank-biserial r, Cramér's V, and regression
+                        coefficients</li>
+                    <li><strong>Software:</strong> R (version 4.4.1) with packages: dplyr, ggplot2, coin, mediation,
+                        lmtest, sandwich</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <footer>
+            <h3>📄 Report Information</h3>
+            <p><strong>Study:</strong> DAT205 – Subject IV: Recycling Behaviors</p>
+            <p><strong>Design:</strong> Randomized Controlled Trial with Mediation and Moderation Analysis</p>
+            <p><strong>Sample:</strong> N = 100 students, ages 12–18</p>
+            <p><strong>Date:</strong> March 2026</p>
+            <p><strong>Data Source:</strong> Subject 4_Recycling_Experiment_Database.csv</p>
+            <p style="margin-top: 20px; opacity: 0.8;">Prepared by: DAT205 Analysis Team</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                <a href="https://github.com/mrv0for0vandeta/beh301" style="color: #3498db; text-decoration: none;">
+                    📂 View on GitHub
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>
